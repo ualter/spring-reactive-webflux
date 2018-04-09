@@ -1,7 +1,10 @@
 package com.spring.webflux.reactive.model;
 
-public class Vehicle {
+import java.io.Serializable;
+
+public class Vehicle implements Serializable {
     
+    private static final long serialVersionUID = -6415713305955411683L;
     private String  carPlateNumber;
     private Long    weight;
     private Integer speed;

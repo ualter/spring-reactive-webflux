@@ -24,13 +24,20 @@ public class HighwayHandler {
     public Mono<ServerResponse> vehicleDetected(ServerRequest request) {
     	
     	HighwayTrafficSimulator highwayTrafficSimulator = new HighwayTrafficSimulator();
+    	
+    	
+/*//    	Flux.interval(Duration.ofMillis(500))
+//    	    .flatMap(index -> )
+*/    	
+    	    
+    	
     	Flux<Vehicle> publisher = Flux.<Vehicle>create(fluxSink -> {
             int index = 0;
             while( true ) {
               fluxSink.next(highwayTrafficSimulator.generateRandomVehicle());
               index++;
             }
-        }).delayElements(Duration.ofMillis(1000)).share();    
+        }).share();    
         //}).publish().autoConnect();
         //}).delayElements(Duration.ofMillis(1000)).share();    
         

@@ -1,5 +1,7 @@
 package com.spring.webflux.reactive.client;
 
+import java.time.Duration;
+
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -16,6 +18,7 @@ public class VehiclesWebClient {
 	            .accept(MediaType.APPLICATION_STREAM_JSON)
 	            .exchange()
 	            .flatMapMany(response -> response.bodyToFlux(Vehicle.class))
+	            .delayElements(Duration.ofMillis(1000))
 	            .subscribe(s -> {
 	                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + s);
 	                },
@@ -28,7 +31,7 @@ public class VehiclesWebClient {
 		VehiclesWebClient vehiclesWebClient = new VehiclesWebClient();
 		vehiclesWebClient.vehicleDetected();
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
