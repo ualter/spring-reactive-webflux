@@ -6,6 +6,9 @@ public class Vehicle {
     private Long    weight;
     private Integer speed;
     
+    public Vehicle() {
+    	
+    }
     public Vehicle(String carPlateNumber, Long weight, Integer speed) {
         super();
         this.carPlateNumber = carPlateNumber;

@@ -1,5 +1,7 @@
 package com.spring.webflux.reactive;
 
+import java.time.Duration;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -10,7 +12,6 @@ import com.spring.webflux.reactive.model.Vehicle;
 import com.spring.webflux.reactive.repository.HighwayReactiveRepositoryImpl;
 import com.spring.webflux.reactive.repository.HighwayTrafficSimulator;
 
-import reactor.core.publisher.ConnectableFlux;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -20,29 +21,23 @@ public class HighwayHandler {
     @Autowired
     private HighwayReactiveRepositoryImpl highwayRepository;
     
-    public Mono<ServerResponse> getVehicleDetected(ServerRequest request) {
-        //Flux<Vehicle> vehicle = highwayRepository.vechicleDetected();
-        
-        
-        HighwayTrafficSimulator h = new HighwayTrafficSimulator();
-        ConnectableFlux<Vehicle> publisher = Flux.<Vehicle>create(fluxSink -> {
-            while(true) {
-                fluxSink.next(h.generateRandomVehicle());
+    public Mono<ServerResponse> vehicleDetected(ServerRequest request) {
+    	
+    	HighwayTrafficSimulator highwayTrafficSimulator = new HighwayTrafficSimulator();
+    	Flux<Vehicle> publisher = Flux.<Vehicle>create(fluxSink -> {
+            int index = 0;
+            while( true ) {
+              fluxSink.next(highwayTrafficSimulator.generateRandomVehicle());
+              index++;
             }
-        })
-          //.sample(Duration.ofMillis(1))
-          .log()
-          //.subscribeOn(Schedulers.parallel())
-          .publish();
-
+        }).delayElements(Duration.ofMillis(1000)).share();    
+        //}).publish().autoConnect();
+        //}).delayElements(Duration.ofMillis(1000)).share();    
         
+        return ServerResponse.ok()
+            .contentType(MediaType.APPLICATION_STREAM_JSON)
+            .body(publisher,Vehicle.class);
         
-        publisher.subscribe( v -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(v,Vehicle.class) );
-        publisher.connect();
-        
-        
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(vehicle,Vehicle.class);
-        //return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromObject(vehicle));
     }
     
 

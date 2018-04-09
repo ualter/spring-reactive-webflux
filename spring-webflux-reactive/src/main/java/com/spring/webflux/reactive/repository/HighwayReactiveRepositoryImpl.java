@@ -15,7 +15,7 @@ public class HighwayReactiveRepositoryImpl implements HighwayReactiveRepository 
     
     public Flux<Vehicle> vechicleDetected() {
         
-        
+        return null;
     }
 
 
