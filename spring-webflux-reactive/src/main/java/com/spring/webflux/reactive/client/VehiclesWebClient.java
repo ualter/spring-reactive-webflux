@@ -18,7 +18,7 @@ public class VehiclesWebClient {
 	            .accept(MediaType.APPLICATION_STREAM_JSON)
 	            .exchange()
 	            .flatMapMany(response -> response.bodyToFlux(Vehicle.class))
-	            .delayElements(Duration.ofMillis(1000))
+	            .delayElements(Duration.ofMillis(1))
 	            .subscribe(s -> {
 	                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + s);
 	                },

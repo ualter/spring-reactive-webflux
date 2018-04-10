@@ -1,0 +1,9 @@
+logging:
+  level:
+    org.springframework.web: DEBUG
+    guru.springframework.controllers: DEBUG
+    org.hibernate: DEBUG
+    reactor.ipc: ERROR
+    io.netty.util.internal: WARN
+    #reactor.ipc.netty.http.client: INFO
+      

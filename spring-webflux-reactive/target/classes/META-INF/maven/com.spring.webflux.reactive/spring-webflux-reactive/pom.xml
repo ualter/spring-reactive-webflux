@@ -51,6 +51,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-transport-native-epoll</artifactId>
+			<version>4.0.27.Final</version>
+			<classifier>linux-x86_64</classifier>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
