@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: spring-webflux-reactive
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: ujunior
+Built-By: Ualter
 Implementation-Vendor-Id: com.spring.webflux.reactive
-Build-Jdk: 1.8.0_151
+Build-Jdk: 1.8.0_144
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/spring-webflux-reactive
 Created-By: Maven Integration for Eclipse
