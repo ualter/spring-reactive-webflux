@@ -8,15 +8,21 @@ public class Vehicle implements Serializable {
     private String  carPlateNumber;
     private Long    weight;
     private Integer speed;
+    private String  color;
+    private Integer modelYear;
+    private String  gasType;
     
     public Vehicle() {
     	
     }
-    public Vehicle(String carPlateNumber, Long weight, Integer speed) {
+    public Vehicle(String carPlateNumber, Long weight, Integer speed, String color, Integer modelYear, String gasType) {
         super();
         this.carPlateNumber = carPlateNumber;
-        this.weight = weight;
-        this.speed = speed;
+        this.weight    = weight;
+        this.speed     = speed;
+        this.color     = color;
+        this.modelYear = modelYear;
+        this.gasType   = gasType;
     }
     public String getCarPlateNumber() {
         return carPlateNumber;
@@ -36,16 +42,28 @@ public class Vehicle implements Serializable {
     public void setSpeed(Integer speed) {
         this.speed = speed;
     }
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Vehicle [carPlateNumber=");
-        builder.append(carPlateNumber);
-        builder.append(", weight=");
-        builder.append(weight);
-        builder.append(", speed=");
-        builder.append(speed);
-        builder.append("]");
-        return builder.toString();
-    }
+    public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public Integer getModelYear() {
+		return modelYear;
+	}
+	public void setModelYear(Integer modelYear) {
+		this.modelYear = modelYear;
+	}
+	public String getGasType() {
+		return gasType;
+	}
+	public void setGasType(String gasType) {
+		this.gasType = gasType;
+	}
+	@Override
+	public String toString() {
+		return String.format("Vehicle [carPlateNumber=%s, weight=%s, speed=%s, color=%s, modelYear=%s, gasType=%s]",
+				carPlateNumber, weight, speed, color, modelYear, gasType);
+	}
+	
 }

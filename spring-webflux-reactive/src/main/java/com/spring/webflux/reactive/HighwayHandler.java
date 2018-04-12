@@ -14,7 +14,6 @@ import reactor.core.publisher.Mono;
 @Component
 public class HighwayHandler {
     
-    
     @Autowired
     HighwayTraffic highwayTraffic;
     
@@ -24,6 +23,5 @@ public class HighwayHandler {
             .body(highwayTraffic.flowTraffic(),Vehicle.class);
         
     }
-    
 
 }

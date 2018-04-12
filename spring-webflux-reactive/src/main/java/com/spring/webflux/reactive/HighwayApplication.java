@@ -6,10 +6,10 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 
 @SpringBootApplication
 @EnableWebFlux
-public class Application 
+public class HighwayApplication 
 {
     public static void main( String[] args )
     {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(HighwayApplication.class, args);
     }
 }

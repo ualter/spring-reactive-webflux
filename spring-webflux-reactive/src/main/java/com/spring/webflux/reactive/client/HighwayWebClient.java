@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.spring.webflux.reactive.model.Vehicle;
 
-public class VehiclesWebClient {
+public class HighwayWebClient {
 
 	private WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
 
@@ -51,7 +51,7 @@ public class VehiclesWebClient {
 	}
 
 	public static void main(String[] args) {
-		VehiclesWebClient vehiclesWebClient = new VehiclesWebClient();
+		HighwayWebClient vehiclesWebClient = new HighwayWebClient();
 		//vehiclesWebClient.vehicleHigherThen120Detected();
 		vehiclesWebClient.vehicleDetected();
 		try {

@@ -31,12 +31,13 @@ public class HighwayTrafficSimulator implements HighwayTraffic {
 		return Flux.<Vehicle>create(fluxSink -> {
 			boolean inFrameTime = true;
 			int index = 1;
-			while ( index <= 20000 && inFrameTime ) {
+			while (index <= 30000 && inFrameTime) {
 				fluxSink.next(HighwayUtilities.simulateTraffic());
 				index++;
 
-				long timeMinutesHighwayOpened = startTime.until(LocalDateTime.now(), ChronoUnit.MILLIS);
-				if ( timeMinutesHighwayOpened > 10000 ) {
+				long timeMinutesHighwayOpened = startTime.until(LocalDateTime.now(), 
+						ChronoUnit.MILLIS);
+				if (timeMinutesHighwayOpened > 30000) {
 					LOGGER.info("TrafficSimulator finish --> With timer");
 					inFrameTime = false;
 				}
@@ -51,32 +52,10 @@ public class HighwayTrafficSimulator implements HighwayTraffic {
 
 	}
 
-	private static class HighwayUtilities {
+	private static String[] COLORS = { "Blue", "White", "Silver", "Black", "Metalic Green", "Orange", "Yellow" };
+	private static String[] GAS_TYPE = { "Diesel", "Gasoline", "Gas", "Eletric", "Alcohol" };
 
-		private static int simulateTrafficIntervals() {
-			int maxSleep = 0;
-			int moviment = ThreadLocalRandom.current().nextInt(1, 5);
-			switch (moviment) {
-			case 1:
-				maxSleep = 1;
-				break;
-			case 2:
-				maxSleep = 75;
-				break;
-			case 3:
-				maxSleep = 1000;
-				break;
-			case 4:
-				maxSleep = 50;
-				break;
-			case 5:
-				maxSleep = 200;
-				break;
-			default:
-				break;
-			}
-			return maxSleep;
-		}
+	private static class HighwayUtilities {
 
 		private static Vehicle simulateTraffic() {
 			RandomStringGenerator rndStringGen = new RandomStringGenerator.Builder().withinRange('A', 'Z').build();
@@ -89,7 +68,11 @@ public class HighwayTrafficSimulator implements HighwayTraffic {
 			Long weight = ThreadLocalRandom.current().nextLong(250L, 4500L);
 			Integer speed = ThreadLocalRandom.current().nextInt(60, 175);
 
-			return new Vehicle(carPlateNumber, weight, speed);
+			String color = COLORS[ThreadLocalRandom.current().nextInt(0, 6)];
+			Integer modelYear = ThreadLocalRandom.current().nextInt(1975, 2018);
+			String gasType = GAS_TYPE[ThreadLocalRandom.current().nextInt(0, 4)];
+
+			return new Vehicle(carPlateNumber, weight, speed, color, modelYear, gasType);
 		}
 
 	}
