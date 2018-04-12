@@ -28,7 +28,7 @@ public class HighwayWebClient {
             .subscribe(s -> {
                     System.out.println(counter.incrementAndGet() + " >>>>>>>>>> " + s);
                 },
-                err -> System.out.println("Error on Weather Stream: " + err),
+                err -> System.out.println("Error on Vehicle Stream: " + err),
                 () -> System.out.println("Vehicle stream stoped!"));
     }
 
@@ -44,7 +44,7 @@ public class HighwayWebClient {
         .subscribe(s -> {
                 System.out.println(counter.incrementAndGet() + " >>>>>>>>>> " + s);
             },
-            err -> System.out.println("Error on Weather Stream: " + err),
+            err -> System.out.println("Error on Vehicle Stream: " + err),
             () -> System.out.println("Vehicle stream stoped!"));
     }
 
