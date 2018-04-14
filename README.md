@@ -1,6 +1,6 @@
 # spring-reactive-webflux
 
-## Start it
+## Run it with...
 ```
 mvn test
 ```
