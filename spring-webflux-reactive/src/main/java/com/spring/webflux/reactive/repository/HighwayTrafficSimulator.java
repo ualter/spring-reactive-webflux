@@ -3,8 +3,6 @@ package com.spring.webflux.reactive.repository;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.commons.text.RandomStringGenerator;
@@ -31,7 +29,7 @@ public class HighwayTrafficSimulator implements HighwayTraffic {
 		return Flux.<Vehicle>create(fluxSink -> {
 			boolean inFrameTime = true;
 			int index = 1;
-			while (index <= 30000 && inFrameTime) {
+			while (index <= 30000 && inFrameTime && !fluxSink.isCancelled() ) {
 				fluxSink.next(HighwayUtilities.simulateTraffic());
 				index++;
 
@@ -43,13 +41,6 @@ public class HighwayTrafficSimulator implements HighwayTraffic {
 				}
 			}
 		}).share();
-	}
-
-	public static void main(String[] args) {
-		HighwayTrafficSimulator h = new HighwayTrafficSimulator();
-		h.flowTraffic().subscribe(v -> System.out.println(v));
-		System.out.println("###");
-
 	}
 
 	private static String[] COLORS = { "Blue", "White", "Silver", "Black", "Metalic Green", "Orange", "Yellow" };
